@@ -13,8 +13,8 @@ abstract class AbstractApi {
      */
     protected readonly http: AxiosInstance;
     protected readonly baseURL: string = 'https://api.eliteprospects.com/v1';
-    private apiKey: string = '';
-    private path: string = '';
+    private readonly apiKey: string = '';
+    private readonly path: string = '';
 
     // --------------------------------------------------------------------------------------------
     // Private Properties
@@ -36,7 +36,7 @@ abstract class AbstractApi {
                 apiKey: this.apiKey,
                 ...requestParams
             },
-            transformResponse: (data: string) => _get(JSON.parse(data), 'data', {})
+            transformResponse: (data: string): any => _get(JSON.parse(data), 'data', {})
         });
     }
 }
