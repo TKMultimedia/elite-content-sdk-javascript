@@ -57,8 +57,8 @@ const webpackConfigGenerator = (serverSide = false) => {
     return config;
 };
 
-const webpackFinalConfig = () => (
-    [webpackConfigGenerator()].concat(process.env.NODE_ENV === 'production' ? webpackConfigGenerator(true) : [])
-)
+// const webpackFinalConfig = () => (
+//     [webpackConfigGenerator()].concat(process.env.NODE_ENV === 'production' ? webpackConfigGenerator(true) : [])
+// )
 
-module.exports = webpackFinalConfig();
+module.exports = webpackConfigGenerator(true);
