@@ -1,5 +1,5 @@
 import { AxiosPromise } from 'axios';
-import IElitePlayerCompact from '../Model/IElitePlayer';
+import IElitePlayer from '../Model/IElitePlayer';
 import AbstractApi from './AbstractApi';
 
 class SearchApi extends AbstractApi {
@@ -7,11 +7,15 @@ class SearchApi extends AbstractApi {
     super(apiKey, 'search');
   }
 
-  public searchForPlayerName(playerName: string): AxiosPromise<IElitePlayerCompact[]> {
+  public searchForPlayerName(playerName: string): AxiosPromise<IElitePlayer[]> {
     return this.execute({
       fields: 'player',
       q: playerName
     });
+  }
+
+  public getPlayerInfoById(playerId: number): AxiosPromise<IElitePlayer> {
+    return this.execute({}, `${playerId}`);
   }
 }
 

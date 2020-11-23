@@ -1,5 +1,9 @@
+import IEliteFlagUrl from './IEliteFlagUrl';
+
 export default interface IEliteNationality {
-  name: string;
   slug: string;
+  name: string;
+  flagUrl: IEliteFlagUrl;
+  updatedAt: string;
   _links: string[];
 }

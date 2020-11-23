@@ -30,8 +30,10 @@ abstract class AbstractApi {
     this.http = Axios.create(options);
   }
 
-  protected execute(requestParams: any): AxiosPromise {
-    return this.http.get(this.path, {
+  protected execute(requestParams: any, pathParams?: string): AxiosPromise {
+    const finalPath: string = typeof pathParams !== 'undefined' ? `${this.path}/${pathParams}` : this.path;
+
+    return this.http.get(finalPath, {
       params: {
         apiKey: this.apiKey,
         ...requestParams

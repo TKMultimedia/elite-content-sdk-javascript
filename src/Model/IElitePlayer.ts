@@ -1,13 +1,47 @@
+import IEliteAgenciesItem from './IEliteAgenciesItem';
+import IEliteLatestStats from './IEliteLatestStats';
+import IEliteLinks from './IEliteLinks';
+import IEliteMetric from './IEliteMetric';
 import IEliteNationality from './IEliteNationality';
+import IEliteNhlRights from './IEliteNhlRights';
+import IEliteStaff from './IEliteStaff';
 
-export default interface IElitePlayerCompact {
+export default interface IElitePlayer {
   id: number;
-  dateOfBirth: string;
-  gender: string;
+  firstName: string;
   lastName: string;
   name: string;
-  position: string;
+  alternativeFirstName: string;
+  alternativeLastName: string;
+  alternativeName: string;
+  gender: string;
   status: string;
-  _links: string[];
+  position: string;
+  detailedPosition: string[];
+  shoots: string;
+  catches: string;
+  dateOfBirth: string;
+  placeOfBirth: string;
+  youthTeam: string;
   nationality: IEliteNationality;
+  secondaryNationality: IEliteNationality;
+  weight: IEliteMetric;
+  height: IEliteMetric;
+  contract: string;
+  capHit: string;
+  gameStatus: string;
+  gameStatusInfo: string;
+  views: number;
+  imageUrl: string;
+  imageCopyright: string;
+  pronunciationUrl: string;
+  staff: IEliteStaff;
+  latestStats: IEliteLatestStats;
+  nhlRights: IEliteNhlRights;
+  agencies: IEliteAgenciesItem[];
+  profileDescriptionAsHTML: string;
+  biographyAsHTML: string;
+  links: IEliteLinks;
+  updatedAt: string;
+  _links: string[];
 }
