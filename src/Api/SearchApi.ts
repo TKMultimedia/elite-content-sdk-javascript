@@ -7,7 +7,7 @@ class SearchApi extends AbstractApi {
     super(apiKey, 'search');
   }
 
-  public searchForPlayerName(playerName: string): AxiosPromise<IElitePlayer[]> {
+  public searchForPlayerName(playerName: string): AxiosPromise<{ player: IElitePlayer[] }> {
     return this.execute({
       fields: 'player',
       q: playerName
