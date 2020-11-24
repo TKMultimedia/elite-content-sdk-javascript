@@ -1,7 +1,7 @@
 import IEliteAgenciesItem from './IEliteAgenciesItem';
 import IEliteLatestStats from './IEliteLatestStats';
 import IEliteLinks from './IEliteLinks';
-import IEliteMetric from './IEliteMetric';
+import { IEliteHeight, IEliteWeight } from './IEliteMetric';
 import IEliteNationality from './IEliteNationality';
 import IEliteNhlRights from './IEliteNhlRights';
 import IEliteStaff from './IEliteStaff';
@@ -25,8 +25,8 @@ export default interface IElitePlayer {
   youthTeam: string;
   nationality: IEliteNationality;
   secondaryNationality: IEliteNationality;
-  weight: IEliteMetric;
-  height: IEliteMetric;
+  weight: IEliteWeight;
+  height: IEliteHeight;
   contract: string;
   capHit: string;
   gameStatus: string;
