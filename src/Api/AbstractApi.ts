@@ -1,6 +1,8 @@
 import Axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig } from 'axios';
 import { get as _get } from 'lodash';
 
+export type transformFunction = (data: string) => any;
+
 abstract class AbstractApi {
 
   // --------------------------------------------------------------------------------------------
@@ -26,19 +28,26 @@ abstract class AbstractApi {
     };
     this.apiKey = apiKey;
     this.path = path;
-
     this.http = Axios.create(options);
   }
 
-  protected execute(requestParams: any, pathParams?: string): AxiosPromise {
+  protected execute(
+    requestParams: any,
+    pathParams?: string,
+    transformer?: transformFunction
+  ): AxiosPromise {
     const finalPath: string = typeof pathParams !== 'undefined' ? `${this.path}/${pathParams}` : this.path;
+    const transformResponse: transformFunction =
+      typeof transformer === 'undefined'
+        ? (data: string): any => _get(JSON.parse(data), 'data', {})
+        : transformer;
 
     return this.http.get(finalPath, {
       params: {
         apiKey: this.apiKey,
         ...requestParams
       },
-      transformResponse: (data: string): any => _get(JSON.parse(data), 'data', {})
+      transformResponse
     });
   }
 }

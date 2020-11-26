@@ -5,5 +5,5 @@ export interface IEliteWeight {
 
 export interface IEliteHeight {
   metrics: number;
-  imperial: String;
+  imperial: string;
 }
