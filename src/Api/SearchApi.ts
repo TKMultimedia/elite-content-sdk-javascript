@@ -1,5 +1,6 @@
 import { AxiosPromise } from 'axios';
 import IElitePlayer from '../Model/IElitePlayer';
+import IEliteTeam from '../Model/IEliteTeam';
 import AbstractApi from './AbstractApi';
 
 class SearchApi extends AbstractApi {
@@ -14,8 +15,11 @@ class SearchApi extends AbstractApi {
     });
   }
 
-  public getPlayerInfoById(playerId: number): AxiosPromise<IElitePlayer> {
-    return this.execute({}, `${playerId}`);
+  public searchForTeamName(teamName: string): AxiosPromise<{ team: IEliteTeam[] }> {
+    return this.execute({
+      fields: 'team',
+      q: teamName
+    });
   }
 }
 
