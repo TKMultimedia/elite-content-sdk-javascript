@@ -1,5 +1,6 @@
 import { AxiosPromise } from 'axios';
 import IElitePlayer from '../Model/IElitePlayer';
+import IEliteTeam from '../Model/IEliteTeam';
 import { teamRostersResponseTransformer } from '../Utils/Transformer/TeamResponseTransformer';
 import AbstractApi from './AbstractApi';
 
@@ -20,6 +21,20 @@ class TeamApi extends AbstractApi {
       `${teamId}/roster`,
       teamRostersResponseTransformer
     );
+  }
+
+  public listTeams(offset?: number, limit?: number): AxiosPromise<IEliteTeam[]> {
+    const processOffset: number = typeof offset !== 'undefined' ? offset : 0;
+    const processLimit: number = typeof limit !== 'undefined' ? limit : 100;
+
+    return this.execute({
+      offset: processOffset,
+      limit: processLimit
+    });
+  }
+
+  public getTeamById(teamId: number): AxiosPromise<IEliteTeam> {
+    return this.execute({}, `${teamId}`);
   }
 }
 
