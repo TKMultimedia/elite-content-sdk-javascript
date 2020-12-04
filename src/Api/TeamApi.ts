@@ -29,7 +29,8 @@ class TeamApi extends AbstractApi {
 
     return this.execute({
       offset: processOffset,
-      limit: processLimit
+      limit: processLimit,
+      status: 'active'
     });
   }
 
