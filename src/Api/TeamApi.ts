@@ -30,7 +30,8 @@ class TeamApi extends AbstractApi {
     return this.execute({
       offset: processOffset,
       limit: processLimit,
-      status: 'active'
+      status: 'active',
+      fields: 'id,name,logoUrl,fullName,city,league,teamType,teamClass,country'
     });
   }
 
