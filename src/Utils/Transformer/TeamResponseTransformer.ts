@@ -3,6 +3,7 @@ import {
 } from 'lodash';
 import { transformFunction } from '../../Api/AbstractApi';
 import IElitePlayer from '../../Model/IElitePlayer';
+import IEliteSeason from '../../Model/IEliteSeason';
 import IEliteStaff from '../../Model/IEliteStaff';
 
 interface IRosterItem {
@@ -16,6 +17,8 @@ interface IRosterItem {
 interface IStaffItem {
   id: string;
   staff: IEliteStaff;
+  session: IEliteSeason;
+  role: string;
 }
 
 export const teamRostersResponseTransformer: transformFunction = (data: string): IElitePlayer[] => {
@@ -27,5 +30,11 @@ export const teamRostersResponseTransformer: transformFunction = (data: string):
 export const teamStaffResponseTransformer: transformFunction = (data: string): IEliteStaff[] => {
   const response: { data: IStaffItem[] } = JSON.parse(data);
 
-  return _map(response.data, (item: IStaffItem): IEliteStaff => item.staff);
+  return _map(response.data, (item: IStaffItem): IEliteStaff => (
+    {
+      ...item.staff,
+      session: item.session,
+      role: item.role
+    }
+  ));
 };

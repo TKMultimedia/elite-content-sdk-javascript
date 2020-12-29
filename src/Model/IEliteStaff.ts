@@ -1,4 +1,5 @@
 import IEliteLinks from './IEliteLinks';
+import IEliteSeason from './IEliteSeason';
 
 export default interface IEliteStaff {
   id: number;
@@ -16,4 +17,6 @@ export default interface IEliteStaff {
   links: IEliteLinks;
   updatedAt: string;
   _links: string[];
+  session?: IEliteSeason;
+  role?: string;
 }
