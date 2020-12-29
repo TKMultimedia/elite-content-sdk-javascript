@@ -10,4 +10,4 @@ export const flagUrlResponseTransformer: transformFunction = (data: string): IEl
   const response: IResponse = JSON.parse(data);
 
   return response.data.flagUrl;
-}
+};
