@@ -1,8 +1,13 @@
 import { AxiosPromise } from 'axios';
 import IElitePlayer from '../Model/IElitePlayer';
+import IEliteSeason from '../Model/IEliteSeason';
 import IEliteStaff from '../Model/IEliteStaff';
 import IEliteTeam from '../Model/IEliteTeam';
-import { teamRostersResponseTransformer, teamStaffResponseTransformer } from '../Utils/Transformer/TeamResponseTransformer';
+import {
+  playerStatSeasonTransformer,
+  teamRostersResponseTransformer,
+  teamStaffResponseTransformer
+} from '../Utils/Transformer/TeamResponseTransformer';
 import AbstractApi from './AbstractApi';
 
 class TeamApi extends AbstractApi {
@@ -49,6 +54,17 @@ class TeamApi extends AbstractApi {
 
   public getTeamById(teamId: number): AxiosPromise<IEliteTeam> {
     return this.execute({}, `${teamId}`);
+  }
+
+  public getTeamSeasons(teamId: number): AxiosPromise<IEliteSeason[]> {
+    return this.execute(
+      {
+        offset: 0,
+        limit: 100
+      },
+      `${teamId}/player-stats/seasons`,
+      playerStatSeasonTransformer
+    );
   }
 }
 

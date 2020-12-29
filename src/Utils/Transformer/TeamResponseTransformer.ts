@@ -38,3 +38,13 @@ export const teamStaffResponseTransformer: transformFunction = (data: string): I
     }
   ));
 };
+
+export const playerStatSeasonTransformer: transformFunction = (data: string): IEliteSeason[] => {
+  interface IResponse {
+    data: IEliteSeason[];
+  };
+
+  const response: IResponse = JSON.parse(data);
+
+  return response.data;
+};
