@@ -5,6 +5,7 @@ import IEliteStaff from '../Model/IEliteStaff';
 import IEliteTeam from '../Model/IEliteTeam';
 import {
   playerStatSeasonTransformer,
+  roasterTransformer,
   teamRostersResponseTransformer,
   teamStaffResponseTransformer
 } from '../Utils/Transformer/TeamResponseTransformer';
@@ -64,6 +65,18 @@ class TeamApi extends AbstractApi {
       },
       `${teamId}/player-stats/seasons`,
       playerStatSeasonTransformer
+    );
+  }
+
+  public getTeamRoaster(teamId: number, season: string): AxiosPromise<IElitePlayer[]> {
+    return this.execute(
+      {
+        offset: 0,
+        limit: 100,
+        season
+      },
+      `${teamId}/player-stats`,
+      roasterTransformer
     );
   }
 }

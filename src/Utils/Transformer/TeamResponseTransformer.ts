@@ -5,6 +5,7 @@ import { transformFunction } from '../../Api/AbstractApi';
 import IElitePlayer from '../../Model/IElitePlayer';
 import IEliteSeason from '../../Model/IEliteSeason';
 import IEliteStaff from '../../Model/IEliteStaff';
+import IEliteStats from '../../Model/IEliteStats';
 
 interface IRosterItem {
   player: IElitePlayer;
@@ -19,6 +20,15 @@ interface IStaffItem {
   staff: IEliteStaff;
   session: IEliteSeason;
   role: string;
+}
+
+interface IRoasterResponseItem {
+  id: string;
+  player: IElitePlayer;
+  season: IEliteSeason;
+  status: string;
+  teamName: string;
+  regularStats: IEliteStats;
 }
 
 export const teamRostersResponseTransformer: transformFunction = (data: string): IElitePlayer[] => {
@@ -48,3 +58,18 @@ export const playerStatSeasonTransformer: transformFunction = (data: string): IE
 
   return response.data;
 };
+
+export const roasterTransformer: transformFunction = (data: string): IElitePlayer[] => {
+  const response: { data: IRoasterResponseItem[] } = JSON.parse(data);
+
+  return _map(response.data, (item: IRoasterResponseItem): IElitePlayer => (
+    {
+      ...item.player,
+      latestStats: {
+        ...item.player.latestStats,
+        regularStats: item.regularStats,
+        teamName: item.teamName
+      }
+    }
+  ));
+}
