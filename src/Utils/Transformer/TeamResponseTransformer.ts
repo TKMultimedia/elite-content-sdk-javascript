@@ -29,6 +29,7 @@ interface IRoasterResponseItem {
   status: string;
   teamName: string;
   regularStats: IEliteStats;
+  jerseyNumber: number;
 }
 
 export const teamRostersResponseTransformer: transformFunction = (data: string): IElitePlayer[] => {
@@ -68,7 +69,8 @@ export const roasterTransformer: transformFunction = (data: string): IElitePlaye
       latestStats: {
         ...item.player.latestStats,
         regularStats: item.regularStats,
-        teamName: item.teamName
+        teamName: item.teamName,
+        jerseyNumber: item.jerseyNumber
       }
     }
   ));
